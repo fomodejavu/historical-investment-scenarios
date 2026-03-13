@@ -1,0 +1,31 @@
+{
+  "scenario_id": "btc-2012",
+  "title": "$1,000 in Bitcoin at Start of 2012",
+  "description": "What $1,000 invested in Bitcoin on January 1, 2012 would be worth today. Bitcoin was trading at approximately $5.27. This was before any of the major bull runs, before mainstream awareness, and before most exchanges existed. The investment required holding through four separate 70-85% crashes.",
+  "ticker": "BTC",
+  "asset_name": "Bitcoin",
+  "asset_type": "crypto",
+  "scenario_date": "2012-01-01",
+  "initial_investment_usd": 1000,
+  "price_on_date_usd": 5.27,
+  "units_purchased": 189.75,
+  "splits": [],
+  "dividends_reinvested": false,
+  "inflation_adjusted": false,
+  "value_today_usd": 19000000,
+  "total_return_pct": 1899900,
+  "cagr_pct": 153.0,
+  "years_held": 13,
+  "major_drawdowns": [
+    { "peak_date": "2013-12-04", "trough_date": "2015-01-14", "drawdown_pct": -85, "peak_price_approx": 1163, "trough_price_approx": 170 },
+    { "peak_date": "2017-12-17", "trough_date": "2018-12-15", "drawdown_pct": -83, "peak_price_approx": 19891, "trough_price_approx": 3236 },
+    { "peak_date": "2021-11-10", "trough_date": "2022-11-21", "drawdown_pct": -77, "peak_price_approx": 68789, "trough_price_approx": 15899 }
+  ],
+  "custody_note": "In 2012, self-custody via software wallets was the primary option. Most exchanges (Mt. Gox, Bitstamp) were primitive and many were hacked. This scenario assumes the coins were held securely throughout.",
+  "last_updated": "2025-01-01",
+  "tags": ["bitcoin", "crypto", "digital-gold", "satoshi", "blockchain", "store-of-value", "halving"],
+  "educational_note": "The astronomical return is real in mathematical terms, but deeply misleading as a practical guide. Surviving four separate 77-85% crashes without selling, while also maintaining secure custody through a decade of exchange hacks and wallet risks, was extraordinarily difficult.",
+  "volatility_warning": "Bitcoin has experienced multiple 80%+ peak-to-trough crashes. It is one of the most volatile assets in financial history.",
+  "calculator_url": "https://fomodejavu.com/?ticker=BTC&date=2012-01-01&amount=1000",
+  "source": "https://fomodejavu.com/methodology/"
+}

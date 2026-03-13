@@ -1,0 +1,35 @@
+{
+  "scenario_id": "inflation-1990-2025",
+  "title": "Inflation: What $1,000 in 1990 Is Worth Today",
+  "description": "The purchasing power of $1,000 in 1990 relative to 2025, using US CPI-U data. This scenario illustrates why holding cash long-term erodes wealth in real terms.",
+  "asset": "USD_CASH",
+  "asset_name": "US Dollar (cash, non-invested)",
+  "asset_type": "inflation",
+  "scenario_date": "1990-01-01",
+  "end_date": "2025-01-01",
+  "initial_amount_usd": 1000,
+  "nominal_value_today_usd": 1000,
+  "cpi_on_start_date": 127.4,
+  "cpi_today": 314.2,
+  "real_value_today_usd": 405,
+  "purchasing_power_lost_pct": 59.5,
+  "average_annual_inflation_pct": 2.83,
+  "years": 35,
+  "what_cost_1000_in_1990": {
+    "median_home_price": 123900,
+    "new_car": 14371,
+    "gallon_of_gas": 1.16,
+    "dozen_eggs": 1.01,
+    "movie_ticket": 4.23,
+    "first_class_stamp": 0.25
+  },
+  "what_costs_equivalent_today": {
+    "note": "Those items cost ~2.5× more in nominal dollars today."
+  },
+  "data_source": "US Bureau of Labor Statistics, CPI-U seasonally unadjusted",
+  "last_updated": "2025-01-01",
+  "tags": ["inflation", "purchasing-power", "cpi", "cash", "real-returns", "monetary-policy"],
+  "educational_note": "A dollar held as cash in 1990 is worth ~40 cents in purchasing power today. This is why long-term investors seek returns that exceed inflation. The S&P 500's ~10% average annual nominal return, vs ~2.8% average inflation, produces a ~7% real annual return.",
+  "calculator_url": "https://fomodejavu.com/inflation/?amount=1000&year=1990",
+  "source": "https://fomodejavu.com/methodology/"
+}

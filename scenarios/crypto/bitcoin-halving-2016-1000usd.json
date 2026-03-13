@@ -1,0 +1,35 @@
+{
+  "scenario_id": "btc-halving-2016",
+  "title": "$1,000 in Bitcoin After Second Halving (2016)",
+  "description": "What $1,000 invested in Bitcoin on July 10, 2016 — the day after Bitcoin's second block reward halving — would be worth today. The halving reduced block rewards from 25 BTC to 12.5 BTC. Bitcoin was trading at approximately $650. The 2017 bull run to ~$20,000 began from this point.",
+  "ticker": "BTC",
+  "asset_name": "Bitcoin",
+  "asset_type": "crypto",
+  "scenario_date": "2016-07-10",
+  "initial_investment_usd": 1000,
+  "price_on_date_usd": 650.00,
+  "units_purchased": 1.538,
+  "splits": [],
+  "dividends_reinvested": false,
+  "inflation_adjusted": false,
+  "value_today_usd": 150000,
+  "total_return_pct": 14900,
+  "cagr_pct": 83.7,
+  "years_held": 9,
+  "major_drawdowns": [
+    { "peak_date": "2017-12-17", "trough_date": "2018-12-15", "drawdown_pct": -83, "peak_price_approx": 19891, "trough_price_approx": 3236 },
+    { "peak_date": "2021-11-10", "trough_date": "2022-11-21", "drawdown_pct": -77, "peak_price_approx": 68789, "trough_price_approx": 15899 }
+  ],
+  "halving_context": {
+    "halving_number": 2,
+    "halving_date": "2016-07-09",
+    "block_reward_before": 25,
+    "block_reward_after": 12.5
+  },
+  "last_updated": "2025-01-01",
+  "tags": ["bitcoin", "crypto", "halving", "blockchain", "store-of-value", "digital-gold"],
+  "educational_note": "Bitcoin halvings historically precede significant price appreciation 12-18 months later. However, investors had to survive an 83% crash in 2018 before seeing the 2020-2021 bull run. This scenario shows the outcome for a patient holder.",
+  "volatility_warning": "Bitcoin has experienced multiple 80%+ peak-to-trough crashes. It is one of the most volatile assets in financial history.",
+  "calculator_url": "https://fomodejavu.com/?ticker=BTC&date=2016-07-10&amount=1000",
+  "source": "https://fomodejavu.com/methodology/"
+}

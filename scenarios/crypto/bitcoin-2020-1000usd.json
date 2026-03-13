@@ -1,0 +1,29 @@
+{
+  "scenario_id": "btc-2020",
+  "title": "$1,000 in Bitcoin at Start of 2020",
+  "description": "What $1,000 invested in Bitcoin on January 1, 2020 would be worth today. BTC was at ~$7,200, just before COVID crashed markets globally — and before the 2020-2021 bull run that took Bitcoin to nearly $69,000. This is the most recent 'obvious in hindsight' entry point.",
+  "ticker": "BTC",
+  "asset_name": "Bitcoin",
+  "asset_type": "crypto",
+  "scenario_date": "2020-01-01",
+  "initial_investment_usd": 1000,
+  "price_on_date_usd": 7200.00,
+  "units_purchased": 0.1389,
+  "splits": [],
+  "dividends_reinvested": false,
+  "inflation_adjusted": false,
+  "value_today_usd": 13500,
+  "total_return_pct": 1250,
+  "cagr_pct": 68.2,
+  "years_held": 5,
+  "major_drawdowns": [
+    { "peak_date": "2020-03-13", "trough_date": "2020-03-13", "drawdown_pct": -50, "note": "COVID crash. BTC dropped from ~$7,200 to ~$3,800 in days before recovering." },
+    { "peak_date": "2021-11-10", "trough_date": "2022-11-21", "drawdown_pct": -77, "peak_price_approx": 68789, "trough_price_approx": 15899 }
+  ],
+  "last_updated": "2025-01-01",
+  "tags": ["bitcoin", "crypto", "covid", "bull-run", "institutional", "microstrategy", "halving-2020"],
+  "educational_note": "Bitcoin fell 50% in the March 2020 COVID crash — then rebounded to nearly $69,000 within 20 months. The COVID crash was one of the greatest short-term buying opportunities in Bitcoin's history for investors who held (or bought more).",
+  "volatility_warning": "Bitcoin is highly volatile. Even within this 5-year holding period, the investment fell as low as ~$530 during the March 2020 COVID crash before recovering.",
+  "calculator_url": "https://fomodejavu.com/?ticker=BTC&date=2020-01-01&amount=1000",
+  "source": "https://fomodejavu.com/methodology/"
+}

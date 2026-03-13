@@ -1,0 +1,30 @@
+{
+  "scenario_id": "aapl-iphone-2007",
+  "title": "$1,000 in Apple on iPhone Launch Day (2007)",
+  "description": "What $1,000 invested in Apple on January 9, 2007 — the day Steve Jobs unveiled the first iPhone — would be worth today with dividends reinvested. The iPhone announcement was the inflection point that transformed Apple from a computer maker into the most valuable consumer company on Earth.",
+  "ticker": "AAPL",
+  "asset_name": "Apple Inc.",
+  "asset_type": "stock",
+  "scenario_date": "2007-01-09",
+  "initial_investment_usd": 1000,
+  "price_on_date_usd": 11.97,
+  "shares_purchased": 83.5,
+  "splits": [
+    { "date": "2014-06-09", "ratio": "7:1", "multiplier": 7 },
+    { "date": "2020-08-31", "ratio": "4:1", "multiplier": 4 }
+  ],
+  "total_split_multiplier": 28,
+  "split_adjusted_shares": 2338,
+  "dividends_reinvested": true,
+  "dividend_note": "Apple reinstated its dividend in August 2012 at $0.38/share/quarter. DRIP assumed from first payment. Dividend has grown every year since.",
+  "inflation_adjusted": false,
+  "value_today_usd": 43000,
+  "total_return_pct": 4200,
+  "cagr_pct": 23.9,
+  "years_held": 18,
+  "last_updated": "2025-01-01",
+  "tags": ["iphone", "steve-jobs", "consumer-electronics", "big-tech", "dividend", "trillion-dollar", "wearables"],
+  "educational_note": "Apple's two splits (7:1 in 2014, 4:1 in 2020) turned 83 shares into over 2,300. Dividends reinvested from 2012 onward meaningfully added to total return. Apple also went through a painful correction in 2008-2009 (down ~60%) that an investor had to survive.",
+  "calculator_url": "https://fomodejavu.com/?ticker=AAPL&date=2007-01-09&amount=1000",
+  "source": "https://fomodejavu.com/methodology/"
+}

@@ -1,0 +1,30 @@
+{
+  "scenario_id": "googl-ipo-2004",
+  "title": "$1,000 in Google at IPO (2004)",
+  "description": "What $1,000 invested in Google (now Alphabet) on August 19, 2004 — its IPO date — would be worth today. Google raised $1.67B in a Dutch auction IPO at $85/share, famously allowing any investor to participate. Many considered the price too high; it was not.",
+  "ticker": "GOOGL",
+  "asset_name": "Alphabet Inc. (Google)",
+  "asset_type": "stock",
+  "scenario_date": "2004-08-19",
+  "initial_investment_usd": 1000,
+  "price_on_date_usd": 85.00,
+  "shares_purchased": 11.76,
+  "splits": [
+    { "date": "2014-04-03", "ratio": "2:1 (Class C creation)", "multiplier": 2, "note": "Created GOOG Class C shares alongside GOOGL Class A. Effective doubling of share count." },
+    { "date": "2022-07-18", "ratio": "20:1", "multiplier": 20 }
+  ],
+  "total_split_multiplier": 40,
+  "split_adjusted_shares": 470.4,
+  "dividends_reinvested": false,
+  "dividend_note": "Google/Alphabet did not pay dividends for most of this period. Alphabet initiated its first-ever dividend in Q1 2024.",
+  "inflation_adjusted": false,
+  "value_today_usd": 78000,
+  "total_return_pct": 7700,
+  "cagr_pct": 23.7,
+  "years_held": 21,
+  "last_updated": "2025-01-01",
+  "tags": ["ipo", "search", "advertising", "youtube", "cloud", "big-tech", "alphabet", "waymo", "dutch-auction"],
+  "educational_note": "Google's Dutch auction IPO was unusual — it was designed to let small investors participate at the same price as institutions. The $85 IPO price seemed expensive vs peers; with hindsight it was extraordinarily cheap.",
+  "calculator_url": "https://fomodejavu.com/?ticker=GOOGL&date=2004-08-19&amount=1000",
+  "source": "https://fomodejavu.com/methodology/"
+}

@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What If I Had Invested? — FomoDéjàVu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3d;
+    --accent: #6ee7b7;
+    --accent2: #f59e0b;
+    --accent3: #60a5fa;
+    --text: #f0f0f8;
+    --muted: #6b7280;
+    --danger: #f87171;
+    --radius: 12px;
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-display);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Ambient background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(110,231,183,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(96,165,250,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 50% 50%, rgba(245,158,11,0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .widget-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 560px;
+  }
+
+  /* Header */
+  .widget-header {
+    margin-bottom: 28px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .widget-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    opacity: 0.85;
+  }
+
+  .widget-title {
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text);
+  }
+
+  .widget-title span {
+    color: var(--accent);
+  }
+
+  /* Card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    animation: fadeUp 0.5s 0.1s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(110,231,183,0.4), transparent);
+  }
+
+  /* Quick picks */
+  .quick-picks-label {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .quick-picks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .pick-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+  }
+
+  .pick-btn:hover, .pick-btn.active {
+    background: rgba(110,231,183,0.12);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  /* Form */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  input, select {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 11px 14px;
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+  input:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(110,231,183,0.1);
+  }
+
+  input[type="range"] {
+    padding: 0;
+    height: 4px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    background: var(--border);
+    border: none;
+    box-shadow: none;
+  }
+
+  .range-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .range-val {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    min-width: 70px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* Toggle */
+  .toggles {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .toggle-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+  }
+
+  .toggle-item:hover { color: var(--text); }
+
+  .toggle-switch {
+    width: 34px;
+    height: 18px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    position: relative;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .toggle-item input:checked + .toggle-switch {
+    background: rgba(110,231,183,0.2);
+    border-color: var(--accent);
+  }
+
+  .toggle-item input:checked + .toggle-switch::after {
+    left: 18px;
+    background: var(--accent);
+  }
+
+  .toggle-item input { display: none; }
+
+  /* Calculate button */
+  .calc-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--accent);
+    color: #0a0a0f;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 800;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .calc-btn:hover {
+    background: #a7f3d0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(110,231,183,0.25);
+  }
+
+  .calc-btn:active { transform: translateY(0); }
+
+  .calc-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  }
+
+  /* Result card */
+  .result {
+    margin-top: 20px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: none;
+    animation: resultReveal 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result.show { display: block; }
+
+  .result::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(110,231,183,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .result-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .result-value {
+    font-size: clamp(32px, 8vw, 52px);
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+
+  .result-value.loss { color: var(--danger); }
+
+  .result-sub {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .result-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .stat-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+
+  .stat-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .stat-value.pos { color: var(--accent); }
+  .stat-value.neg { color: var(--danger); }
+
+  /* Mini bar chart */
+  .bar-chart {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent3), var(--accent));
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 0;
+  }
+
+  /* Educational note */
+  .edu-note {
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+    color: rgba(245,158,11,0.9);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .edu-note strong { font-weight: 700; }
+
+  /* CTA */
+  .result-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background: rgba(110,231,183,0.06);
+    border: 1px solid rgba(110,231,183,0.15);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .result-cta:hover {
+    background: rgba(110,231,183,0.1);
+    border-color: rgba(110,231,183,0.3);
+    transform: translateX(2px);
+  }
+
+  .cta-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .cta-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 1px;
+  }
+
+  .cta-arrow {
+    font-size: 18px;
+    color: var(--accent);
+  }
+
+  /* Disclaimer */
+  .disclaimer {
+    text-align: center;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: 18px;
+    font-family: var(--font-mono);
+    animation: fadeUp 0.5s 0.2s ease both;
+  }
+
+  .disclaimer a {
+    color: rgba(110,231,183,0.6);
+    text-decoration: none;
+  }
+
+  .disclaimer a:hover { color: var(--accent); }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes resultReveal {
+    from { opacity: 0; transform: scale(0.95) translateY(8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  @keyframes countUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .result-grid { grid-template-columns: 1fr 1fr; }
+    .card { padding: 20px; }
+  }
+
+  /* Embed mode (no body bg) */
+  .embed-only body {
+    background: transparent;
+    min-height: auto;
+    padding: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="widget-wrapper">
+  <div class="widget-header">
+    <div class="widget-eyebrow">Historical Investment Calculator</div>
+    <h1 class="widget-title">What if I had<br>invested <span>back then?</span></h1>
+  </div>
+
+  <div class="card">
+    <!-- Quick picks -->
+    <div class="quick-picks-label">Quick scenarios</div>
+    <div class="quick-picks">
+      <button class="pick-btn" data-ticker="AMZN" data-date="1997-05-15" data-amount="1000" data-name="Amazon IPO">Amazon IPO '97</button>
+      <button class="pick-btn" data-ticker="AAPL" data-date="2007-01-09" data-amount="1000" data-name="Apple iPhone">Apple iPhone '07</button>
+      <button class="pick-btn" data-ticker="NVDA" data-date="2015-01-02" data-amount="1000" data-name="NVIDIA 2015">NVIDIA '15</button>
+      <button class="pick-btn" data-ticker="TSLA" data-date="2012-01-03" data-amount="1000" data-name="Tesla 2012">Tesla '12</button>
+      <button class="pick-btn" data-ticker="BTC" data-date="2016-07-10" data-amount="1000" data-name="Bitcoin halving">BTC Halving '16</button>
+      <button class="pick-btn" data-ticker="SPY" data-date="2009-03-09" data-amount="1000" data-name="S&P 500 bottom">S&P 500 Bottom '09</button>
+    </div>
+
+    <!-- Form -->
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="ticker">Asset</label>
+        <select id="ticker">
+          <optgroup label="Stocks">
+            <option value="AMZN">Amazon (AMZN)</option>
+            <option value="AAPL">Apple (AAPL)</option>
+            <option value="TSLA">Tesla (TSLA)</option>
+            <option value="NVDA">NVIDIA (NVDA)</option>
+            <option value="MSFT">Microsoft (MSFT)</option>
+            <option value="GOOGL">Alphabet (GOOGL)</option>
+            <option value="META">Meta (META)</option>
+            <option value="NFLX">Netflix (NFLX)</option>
+          </optgroup>
+          <optgroup label="ETFs">
+            <option value="SPY">S&P 500 (SPY)</option>
+            <option value="QQQ">NASDAQ-100 (QQQ)</option>
+            <option value="VTI">Total Market (VTI)</option>
+          </optgroup>
+          <optgroup label="Crypto">
+            <option value="BTC">Bitcoin (BTC)</option>
+            <option value="ETH">Ethereum (ETH)</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="date">Investment Date</label>
+        <input type="date" id="date" value="2012-01-01" min="1993-01-01" max="2024-12-31">
+      </div>
+
+      <div class="form-group full">
+        <label>Amount Invested</label>
+        <div class="range-row">
+          <input type="range" id="amount-range" min="100" max="50000" step="100" value="1000">
+          <span class="range-val" id="amount-display">$1,000</span>
+        </div>
+        <input type="number" id="amount" value="1000" min="1" max="1000000" style="margin-top: 8px; font-size:14px; padding: 9px 12px;">
+      </div>
+    </div>
+
+    <div class="toggles">
+      <label class="toggle-item">
+        <input type="checkbox" id="drip">
+        <span class="toggle-switch"></span>
+        Reinvest dividends (DRIP)
+      </label>
+      <label class="toggle-item">
+        <input type="checkbox" id="inflation">
+        <span class="toggle-switch"></span>
+        Inflation-adjusted
+      </label>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">
+      Calculate →
+    </button>
+
+    <!-- Result -->
+    <div class="result" id="result">
+      <div class="result-eyebrow" id="result-eyebrow">Your $1,000 in AMZN · May 15, 1997</div>
+      <div class="result-value" id="result-value">$2,050,000</div>
+      <div class="result-sub" id="result-sub">would be worth today</div>
+
+      <div class="bar-chart"><div class="bar-fill" id="bar-fill"></div></div>
+
+      <div class="result-grid">
+        <div class="stat-box">
+          <div class="stat-label">Total Return</div>
+          <div class="stat-value pos" id="stat-return">+204,900%</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">CAGR</div>
+          <div class="stat-value pos" id="stat-cagr">37.8%/yr</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Years Held</div>
+          <div class="stat-value" id="stat-years">27 yrs</div>
+        </div>
+      </div>
+
+      <div class="edu-note" id="edu-note">
+        <strong>Note:</strong> These figures are educational approximations using historical adjusted close prices. All stock splits accounted for. Past performance is not indicative of future results.
+      </div>
+
+      <a class="result-cta" id="result-cta" href="https://fomodejavu.com/" target="_blank" rel="noopener">
+        <div>
+          <div class="cta-text">Get real-time results →</div>
+          <div class="cta-sub">Live calculator at fomodejavu.com</div>
+        </div>
+        <div class="cta-arrow">↗</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    Educational use only. Not financial advice.<br>
+    Powered by <a href="https://fomodejavu.com/" target="_blank">fomodejavu.com</a> ·
+    <a href="https://github.com/fomodejavu/historical-investment-scenarios" target="_blank">Open dataset on GitHub</a>
+  </div>
+</div>
+
+<script>
+// ─── Scenario Data (from historical-investment-scenarios dataset) ───────────
+const SCENARIOS = {
+  "AMZN": {
+    "1997-05-15": { value: 2050000, cagr: 37.8, return: 204900, note: "Amazon's 4 stock splits turned 510 shares into 122,448. Required surviving a 95% crash in 2001." },
+  },
+  "AAPL": {
+    "2007-01-09": { value: 43000, cagr: 23.9, return: 4200, note: "Apple's two splits (7:1 and 4:1) turned 83 shares into 2,338. Dividends reinvested from 2012." },
+  },
+  "TSLA": {
+    "2012-01-03": { value: 50000, cagr: 33.8, return: 4900, note: "Tesla's two splits turned 158 shares into 2,370. Stock was near its IPO price multiple times in 2012-13." },
+  },
+  "NVDA": {
+    "2015-01-02": { value: 108000, cagr: 49.8, return: 10700, note: "NVIDIA went from gaming GPU company to AI infrastructure backbone. Splits of 4:1 and 10:1 produced a 40× multiplier." },
+  },
+  "MSFT": {
+    "2014-02-04": { value: 19000, cagr: 29.2, return: 1800, note: "Satya Nadella's cloud pivot transformed Microsoft. No splits — all return from price + DRIP." },
+  },
+  "GOOGL": {
+    "2004-08-19": { value: 78000, cagr: 23.7, return: 7700, note: "Google's Dutch auction IPO at $85 gave retail investors equal access. 40× split-adjusted today." },
+  },
+  "META": {
+    "2012-05-18": { value: 15200, cagr: 22.6, return: 1420, note: "Facebook's IPO was called a disaster — it dropped 53% in 90 days. Long-term holders were rewarded." },
+  },
+  "NFLX": {
+    "2012-01-03": { value: 21000, cagr: 24.8, return: 2000, note: "Netflix had just survived the Qwikster crisis (stock -75%). Buying at that low required conviction." },
+  },
+  "SPY": {
+    "2000-01-03": { value: 5400, cagr: 8.2, return: 440, note: "Worst possible timing (dot-com peak) still returned 5× in 25 years with DRIP. Time > timing." },
+    "2009-03-09": { value: 9800, cagr: 15.9, return: 880, note: "The exact 2009 market bottom. Nobody knew it was the bottom at the time — headlines were catastrophic." },
+  },
+  "QQQ": {
+    "2003-01-02": { value: 25000, cagr: 14.7, return: 2400, note: "NASDAQ-100 after an 80% crash. The surviving dot-com companies (Apple, Amazon, Google) dominated for 20 years." },
+  },
+  "VTI": {
+    "2004-01-02": { value: 9500, cagr: 11.9, return: 850, note: "Boring total market index. ~12% CAGR over 21 years. Used as the benchmark to compare individual stock picks." },
+  },
+  "BTC": {
+    "2012-01-01": { value: 19000000, cagr: 153, return: 1899900, isCrypto: true, note: "Real return — but required holding through four separate 77-95% crashes. Most investors sold during crashes." },
+    "2016-07-10": { value: 150000, cagr: 83.7, return: 14900, isCrypto: true, note: "Day after Bitcoin's second halving. An 83% crash followed in 2018 before the 2020-21 bull run." },
+    "2020-01-01": { value: 13500, cagr: 68.2, return: 1250, isCrypto: true, note: "Bitcoin fell 50% in the March 2020 COVID crash, then rose to ~$69K by November 2021." },
+  },
+  "ETH": {
+    "2015-08-07": { value: 1150000, cagr: 122, return: 114900, isCrypto: true, note: "Ethereum introduced smart contracts. The 2018 crash took it from $1,432 to $84 — a 95% drop." },
+  },
+};
+
+// ─── Approximate historical price lookup (for user-specified dates) ──────────
+function estimateReturn(ticker, dateStr, amount, drip, inflationAdj) {
+  const date = new Date(dateStr);
+  const now = new Date('2025-01-15');
+  const yearsHeld = (now - date) / (1000 * 60 * 60 * 24 * 365.25);
+
+  if (yearsHeld < 0.1) return null;
+
+  // Use pre-calculated scenarios if exact match
+  if (SCENARIOS[ticker] && SCENARIOS[ticker][dateStr]) {
+    const s = SCENARIOS[ticker][dateStr];
+    const scaleFactor = amount / 1000;
+    return {
+      value: Math.round(s.value * scaleFactor),
+      cagr: s.cagr,
+      totalReturn: s.return,
+      years: Math.round(yearsHeld),
+      note: s.note,
+      isCrypto: s.isCrypto || false,
+    };
+  }
+
+  // Approximate CAGR by ticker for custom dates
+  const approxCagr = {
+    AMZN: 35, AAPL: 22, TSLA: 28, NVDA: 42, MSFT: 24,
+    GOOGL: 22, META: 20, NFLX: 22, SPY: 11, QQQ: 14,
+    VTI: 12, BTC: 80, ETH: 70,
+  };
+
+  const baseCagr = approxCagr[ticker] || 12;
+  const adjustedCagr = drip ? baseCagr + 1.5 : baseCagr;
+  const inflationRate = inflationAdj ? 2.8 : 0;
+  const realCagr = adjustedCagr - inflationRate;
+  const multiplier = Math.pow(1 + realCagr / 100, yearsHeld);
+  const finalValue = Math.round(amount * multiplier);
+  const totalReturn = Math.round((finalValue / amount - 1) * 100);
+
+  const notes = {
+    AMZN: "Figures are approximations. Use the live calculator for exact split-adjusted returns.",
+    AAPL: "Figures include estimated DRIP from 2012 onward. Use live calculator for precision.",
+    BTC: "Crypto returns are highly path-dependent. Actual results vary greatly by exact purchase date.",
+    ETH: "Crypto returns are highly path-dependent. Exact exchange-specific prices may differ.",
+    SPY: "S&P 500 returns include estimated dividend reinvestment at ~1.8% annual yield.",
+    DEFAULT: "Approximate figures based on historical CAGR. Use fomodejavu.com for split-adjusted real-time data."
+  };
+
+  return {
+    value: finalValue,
+    cagr: Math.round(realCagr * 10) / 10,
+    totalReturn,
+    years: Math.round(yearsHeld * 10) / 10,
+    note: notes[ticker] || notes.DEFAULT,
+    isCrypto: ['BTC','ETH'].includes(ticker),
+    isApprox: true,
+  };
+}
+
+// ─── UI Helpers ─────────────────────────────────────────────────────────────
+function fmt(n) {
+  if (n >= 1_000_000) return '$' + (n / 1_000_000).toFixed(2).replace(/\.?0+$/, '') + 'M';
+  if (n >= 1_000) return '$' + Math.round(n).toLocaleString();
+  return '$' + n.toFixed(2);
+}
+
+function animateValue(el, from, to, duration, formatter) {
+  const start = performance.now();
+  const update = (time) => {
+    const progress = Math.min((time - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const current = from + (to - from) * ease;
+    el.textContent = formatter(current);
+    if (progress < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+// ─── Quick Picks ─────────────────────────────────────────────────────────────
+document.querySelectorAll('.pick-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pick-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('ticker').value = btn.dataset.ticker;
+    document.getElementById('date').value = btn.dataset.date;
+    document.getElementById('amount').value = btn.dataset.amount;
+    document.getElementById('amount-range').value = btn.dataset.amount;
+    document.getElementById('amount-display').textContent = '$' + parseInt(btn.dataset.amount).toLocaleString();
+    calculate();
+  });
+});
+
+// ─── Range Sync ──────────────────────────────────────────────────────────────
+const rangeEl = document.getElementById('amount-range');
+const numEl = document.getElementById('amount');
+const displayEl = document.getElementById('amount-display');
+
+rangeEl.addEventListener('input', () => {
+  numEl.value = rangeEl.value;
+  displayEl.textContent = '$' + parseInt(rangeEl.value).toLocaleString();
+});
+
+numEl.addEventListener('input', () => {
+  rangeEl.value = Math.min(numEl.value, 50000);
+  displayEl.textContent = '$' + parseInt(numEl.value || 0).toLocaleString();
+});
+
+// ─── Calculate ───────────────────────────────────────────────────────────────
+function calculate() {
+  const ticker = document.getElementById('ticker').value;
+  const date = document.getElementById('date').value;
+  const amount = parseFloat(document.getElementById('amount').value) || 1000;
+  const drip = document.getElementById('drip').checked;
+  const inflationAdj = document.getElementById('inflation').checked;
+
+  const result = estimateReturn(ticker, date, amount, drip, inflationAdj);
+  if (!result) return;
+
+  const isGain = result.value >= amount;
+  const resultEl = document.getElementById('result');
+  const valueEl = document.getElementById('result-value');
+  const eyebrowEl = document.getElementById('result-eyebrow');
+  const subEl = document.getElementById('result-sub');
+  const returnEl = document.getElementById('stat-return');
+  const cagrEl = document.getElementById('stat-cagr');
+  const yearsEl = document.getElementById('stat-years');
+  const eduEl = document.getElementById('edu-note');
+  const ctaEl = document.getElementById('result-cta');
+  const barFill = document.getElementById('bar-fill');
+
+  // Format date nicely
+  const d = new Date(date + 'T00:00:00');
+  const dateFormatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  // Update content
+  eyebrowEl.textContent = `$${amount.toLocaleString()} in ${ticker} · ${dateFormatted}`;
+  subEl.textContent = `would be worth today${result.isApprox ? ' (approx.)' : ''}${inflationAdj ? ' · inflation-adjusted' : ''}`;
+
+  valueEl.classList.toggle('loss', !isGain);
+  returnEl.classList.toggle('neg', !isGain);
+  returnEl.classList.toggle('pos', isGain);
+
+  // Animate value
+  animateValue(valueEl, amount, result.value, 900, (v) => fmt(v));
+
+  returnEl.textContent = (isGain ? '+' : '') + result.totalReturn.toLocaleString() + '%';
+  cagrEl.textContent = result.cagr + '%/yr';
+  cagrEl.className = 'stat-value ' + (result.cagr >= 0 ? 'pos' : 'neg');
+  yearsEl.textContent = result.years + ' yrs';
+
+  // Bar fill (log scale for crypto)
+  const maxVal = result.isCrypto ? amount * 1000 : amount * 100;
+  const pct = Math.min((result.value / maxVal) * 100, 100);
+  setTimeout(() => { barFill.style.width = pct + '%'; }, 100);
+
+  // Note
+  let noteHtml = `<strong>${result.isCrypto ? '⚠️ Volatility warning:' : '📌 Note:'}</strong> ${result.note}`;
+  if (drip) noteHtml += ' DRIP reinvestment included.';
+  if (inflationAdj) noteHtml += ' Values shown in real (2025) dollars.';
+  eduEl.innerHTML = noteHtml;
+
+  // CTA URL
+  const ctaUrl = `https://fomodejavu.com/?ticker=${ticker}&date=${date}&amount=${amount}${drip ? '&drip=1' : ''}${inflationAdj ? '&inflation=1' : ''}`;
+  ctaEl.href = ctaUrl;
+
+  // Show
+  resultEl.classList.add('show');
+}
+
+// Auto-calculate on load with first pick
+document.querySelector('.pick-btn').click();
+</script>
+</body>
+</html>

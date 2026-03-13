@@ -1,0 +1,32 @@
+{
+  "scenario_id": "nflx-2012",
+  "title": "$1,000 in Netflix at Start of 2012",
+  "description": "What $1,000 invested in Netflix on January 3, 2012 would be worth today. Netflix had just survived the Qwikster debacle — a botched attempt to split DVD and streaming into two companies — which crashed the stock ~75% in late 2011. Buying at the bottom of that crisis required conviction.",
+  "ticker": "NFLX",
+  "asset_name": "Netflix Inc.",
+  "asset_type": "stock",
+  "scenario_date": "2012-01-03",
+  "initial_investment_usd": 1000,
+  "price_on_date_usd": 9.60,
+  "shares_purchased": 104.2,
+  "splits": [
+    { "date": "2015-07-15", "ratio": "7:1", "multiplier": 7 }
+  ],
+  "total_split_multiplier": 7,
+  "split_adjusted_shares": 729.4,
+  "dividends_reinvested": false,
+  "dividend_note": "Netflix has never paid a dividend.",
+  "inflation_adjusted": false,
+  "value_today_usd": 21000,
+  "total_return_pct": 2000,
+  "cagr_pct": 24.8,
+  "years_held": 13,
+  "max_drawdown_during_hold": -76,
+  "max_drawdown_date": "2022-05-12",
+  "max_drawdown_note": "Netflix fell ~76% in 2022 after reporting its first subscriber loss in over a decade.",
+  "last_updated": "2025-01-01",
+  "tags": ["streaming", "entertainment", "content", "cord-cutting", "media", "reed-hastings"],
+  "educational_note": "Netflix's 7:1 split in 2015 converted 104 shares to 729 shares. The company went through two separate 70%+ crashes during this holding period — both eventually recovered.",
+  "calculator_url": "https://fomodejavu.com/?ticker=NFLX&date=2012-01-03&amount=1000",
+  "source": "https://fomodejavu.com/methodology/"
+}

@@ -1,0 +1,30 @@
+{
+  "scenario_id": "eth-launch-2015",
+  "title": "$1,000 in Ethereum at Launch (2015)",
+  "description": "What $1,000 invested in Ethereum on August 7, 2015 — shortly after its mainnet launch — would be worth today. ETH was priced at approximately $2.83 at the time. Ethereum introduced smart contracts and became the foundation for DeFi, NFTs, and Web3.",
+  "ticker": "ETH",
+  "asset_name": "Ethereum",
+  "asset_type": "crypto",
+  "scenario_date": "2015-08-07",
+  "initial_investment_usd": 1000,
+  "price_on_date_usd": 2.83,
+  "units_purchased": 353.4,
+  "splits": [],
+  "dividends_reinvested": false,
+  "inflation_adjusted": false,
+  "value_today_usd": 1150000,
+  "total_return_pct": 114900,
+  "cagr_pct": 122.0,
+  "years_held": 10,
+  "major_drawdowns": [
+    { "peak_date": "2018-01-13", "trough_date": "2018-12-15", "drawdown_pct": -95, "peak_price_approx": 1432, "trough_price_approx": 84 },
+    { "peak_date": "2021-11-10", "trough_date": "2022-06-18", "drawdown_pct": -80, "peak_price_approx": 4891, "trough_price_approx": 897 }
+  ],
+  "staking_note": "Post-Merge (September 2022), ETH can be staked for ~3-4% annual yield. This scenario does not include staking rewards. Stakers would have earned additional ETH on top of price appreciation.",
+  "last_updated": "2025-01-01",
+  "tags": ["ethereum", "crypto", "smart-contracts", "defi", "nft", "web3", "vitalik-buterin", "proof-of-stake"],
+  "educational_note": "Ethereum's transition from Proof of Work to Proof of Stake ('The Merge') in September 2022 fundamentally changed its monetary policy. ETH became deflationary under certain network load conditions. This scenario covers only price appreciation, not staking yield.",
+  "volatility_warning": "Ethereum fell 95% from its January 2018 peak to its December 2018 trough. Investors had to survive this and an 80% crash in 2022.",
+  "calculator_url": "https://fomodejavu.com/?ticker=ETH&date=2015-08-07&amount=1000",
+  "source": "https://fomodejavu.com/methodology/"
+}

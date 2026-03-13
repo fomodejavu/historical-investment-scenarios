@@ -1,0 +1,33 @@
+{
+  "scenario_id": "tsla-2012",
+  "title": "$1,000 in Tesla at Start of 2012",
+  "description": "What $1,000 invested in Tesla on January 3, 2012 would be worth today. Tesla was trading at ~$6.33 (split-adjusted) and had not yet proven it could deliver the Model S at scale. Profitability was years away. The stock would rise over 3,000% before its first split.",
+  "ticker": "TSLA",
+  "asset_name": "Tesla Inc.",
+  "asset_type": "stock",
+  "scenario_date": "2012-01-03",
+  "initial_investment_usd": 1000,
+  "price_on_date_usd": 6.33,
+  "shares_purchased": 158.0,
+  "splits": [
+    { "date": "2020-08-31", "ratio": "5:1", "multiplier": 5 },
+    { "date": "2022-08-25", "ratio": "3:1", "multiplier": 3 }
+  ],
+  "total_split_multiplier": 15,
+  "split_adjusted_shares": 2370,
+  "dividends_reinvested": false,
+  "dividend_note": "Tesla has never paid a dividend.",
+  "inflation_adjusted": false,
+  "value_today_usd": 50000,
+  "total_return_pct": 4900,
+  "cagr_pct": 33.8,
+  "years_held": 13,
+  "max_drawdown_during_hold": -73,
+  "max_drawdown_date": "2023-01-06",
+  "max_drawdown_note": "Tesla fell ~73% between November 2021 and January 2023, from ~$400 to ~$108.",
+  "last_updated": "2025-01-01",
+  "tags": ["ev", "elon-musk", "electric-vehicle", "high-volatility", "growth", "energy", "autonomous"],
+  "educational_note": "Tesla's two splits turned 158 shares into 2,370. The company traded below its IPO price multiple times in 2012-2013. Investors who held through the 73% drawdown in 2022-2023 recovered and surpassed prior highs.",
+  "calculator_url": "https://fomodejavu.com/?ticker=TSLA&date=2012-01-03&amount=1000",
+  "source": "https://fomodejavu.com/methodology/"
+}

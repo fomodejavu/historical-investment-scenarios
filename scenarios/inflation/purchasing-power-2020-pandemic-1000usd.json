@@ -1,0 +1,31 @@
+{
+  "scenario_id": "inflation-2020-2025",
+  "title": "Pandemic Inflation: What $1,000 in Jan 2020 Is Worth Today",
+  "description": "The purchasing power of $1,000 at the start of 2020 relative to 2025, using US CPI-U data. This covers the COVID-era inflation surge (2021-2022) which was the highest sustained inflation in the US since the early 1980s.",
+  "asset": "USD_CASH",
+  "asset_name": "US Dollar (cash, non-invested)",
+  "asset_type": "inflation",
+  "scenario_date": "2020-01-01",
+  "end_date": "2025-01-01",
+  "initial_amount_usd": 1000,
+  "nominal_value_today_usd": 1000,
+  "cpi_on_start_date": 257.9,
+  "cpi_today": 314.2,
+  "real_value_today_usd": 821,
+  "purchasing_power_lost_pct": 17.9,
+  "average_annual_inflation_pct": 4.0,
+  "years": 5,
+  "annual_cpi_breakdown": [
+    { "year": 2020, "annual_inflation_pct": 1.2, "note": "COVID year — low inflation" },
+    { "year": 2021, "annual_inflation_pct": 7.0, "note": "Post-stimulus surge begins" },
+    { "year": 2022, "annual_inflation_pct": 6.5, "note": "Peak inflation — 40-year high" },
+    { "year": 2023, "annual_inflation_pct": 3.4, "note": "Fed rate hikes slow inflation" },
+    { "year": 2024, "annual_inflation_pct": 2.9, "note": "Approaching Fed target" }
+  ],
+  "data_source": "US Bureau of Labor Statistics, CPI-U seasonally unadjusted",
+  "last_updated": "2025-01-01",
+  "tags": ["inflation", "covid", "pandemic", "cpi", "purchasing-power", "fed", "interest-rates", "2022"],
+  "educational_note": "The COVID-era inflation eroded ~18% of cash purchasing power in just 5 years. This is why the Federal Reserve raised interest rates from 0.25% to 5.50% between March 2022 and July 2023 — the fastest rate-hiking cycle in 40 years. Investors in broad equity funds largely kept pace with or exceeded inflation during this period.",
+  "calculator_url": "https://fomodejavu.com/inflation/?amount=1000&year=2020",
+  "source": "https://fomodejavu.com/methodology/"
+}
